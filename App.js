@@ -6,14 +6,11 @@ import { LinearGradient } from "expo-linear-gradient";
 import StartGameScreen from "./screens/StartGameScreen";
 import GameOverScreen from "./screens/GameOverScreen";
 import { StyleSheet, ImageBackground, SafeAreaView } from "react-native";
-import { useFonts } from "expo-font";
-
 
 export default function App() {
   const [userNumber, setUserNumber] = useState();
   const [isGameOver, setIsGameOver] = useState(true);
   const [rounds, setRounds] = useState(0);
-
 
   function pickedNumberHandler(picekedNumber) {
     setUserNumber(picekedNumber);
