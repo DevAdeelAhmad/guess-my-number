@@ -30,6 +30,11 @@ function GameScreen({ userNumber, onGameOver }) {
     }
   }, [guess, userNumber, onGameOver]);
 
+  useEffect(() => {
+    iminBoundary = 1;
+    maxBoundary = 100;
+  }, []);
+
   function nextGuessHandler(direction) {
     if (
       (direction === "lower" && guess < userNumber) ||
@@ -59,7 +64,11 @@ function GameScreen({ userNumber, onGameOver }) {
         <View style={styles.buttonsContainer}>
           <View style={styles.buttonContainer}>
             <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
-              <Ionicons name="remove-circle-sharp" size={24} color={Colors.accent500} />
+              <Ionicons
+                name="remove-circle-sharp"
+                size={24}
+                color={Colors.accent500}
+              />
             </PrimaryButton>
           </View>
           <View style={styles.buttonContainer}>
