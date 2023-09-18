@@ -3,10 +3,11 @@ import Title from "../components/ui/Title";
 import { useState, useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import PrimaryButton from "../components/ui/PrimaryButton";
-import { Alert, StyleSheet, FlatList, Text, View } from "react-native";
+import { Alert, StyleSheet, FlatList, View, Text } from "react-native";
 import InstructionText from "../components/ui/InstructionText";
 import NumberContainer from "../components/game/NumberContainer";
 import Colors from "../utils/colors";
+import GuessLogItem from "../components/game/GuessLogItem";
 
 function generateRandomBetween(min, max, exclude) {
   const randomNumber = Math.floor(Math.random() * (max - min)) + min;
@@ -55,6 +56,9 @@ function GameScreen({ userNumber, onGameOver }) {
     setGuess(newRndNumber);
     setRounds((prevGuessRounds) => [newRndNumber, ...prevGuessRounds]);
   }
+  const guessRoundListLength = rounds.length;
+  console.log("Rounds :", rounds);
+
   return (
     <View style={styles.container}>
       <Title>Opponent's Guess</Title>
@@ -84,10 +88,21 @@ function GameScreen({ userNumber, onGameOver }) {
           </View>
         </View>
       </Card>
-      <View>
+      <View style={{height:400}}>
         <FlatList
           data={rounds}
-          renderItem={(itemData) => <Text>{itemData.item}</Text>}
+          renderItem={(itemData) => {
+            return (
+              <View style={styles.listItem}>
+                <Text style={styles.itemText}>
+                  #{guessRoundListLength - itemData.index}
+                </Text>
+                <Text style={styles.itemText}>
+                  Opponent's Guess: {itemData.item}
+                </Text>
+              </View>
+            );
+          }}
           keyExtractor={(item) => item}
         />
       </View>
@@ -110,5 +125,24 @@ const styles = StyleSheet.create({
   },
   instructionText: {
     marginBottom: 12,
+  },
+  listItem: {
+    borderColor: Colors.primary800,
+    borderWidth: 1,
+    borderRadius: 40,
+    padding: 12,
+    marginVertical: 8,
+    backgroundColor: Colors.accent500,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+    elevation: 4,
+    shadowColor: "black",
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3,
+  },
+  itemText: {
+    fontFamily: "open-sans",
   },
 });
