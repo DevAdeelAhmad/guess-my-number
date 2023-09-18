@@ -7,7 +7,6 @@ import { Alert, StyleSheet, FlatList, View, Text } from "react-native";
 import InstructionText from "../components/ui/InstructionText";
 import NumberContainer from "../components/game/NumberContainer";
 import Colors from "../utils/colors";
-import GuessLogItem from "../components/game/GuessLogItem";
 
 function generateRandomBetween(min, max, exclude) {
   const randomNumber = Math.floor(Math.random() * (max - min)) + min;
@@ -28,7 +27,7 @@ function GameScreen({ userNumber, onGameOver }) {
 
   useEffect(() => {
     if (guess === userNumber) {
-      onGameOver();
+      onGameOver(rounds.length);
     }
   }, [guess, userNumber, onGameOver]);
 
@@ -57,7 +56,6 @@ function GameScreen({ userNumber, onGameOver }) {
     setRounds((prevGuessRounds) => [newRndNumber, ...prevGuessRounds]);
   }
   const guessRoundListLength = rounds.length;
-  console.log("Rounds :", rounds);
 
   return (
     <View style={styles.container}>
@@ -88,7 +86,7 @@ function GameScreen({ userNumber, onGameOver }) {
           </View>
         </View>
       </Card>
-      <View style={{height:400}}>
+      <View style={styles.listContainer}>
         <FlatList
           data={rounds}
           renderItem={(itemData) => {
@@ -144,5 +142,9 @@ const styles = StyleSheet.create({
   },
   itemText: {
     fontFamily: "open-sans",
+  },
+  listContainer: {
+    flex: 1,
+    paddingVertical: 16,
   },
 });
