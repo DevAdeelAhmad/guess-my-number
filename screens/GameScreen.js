@@ -1,11 +1,12 @@
 import Card from "../components/ui/Card";
 import Title from "../components/ui/Title";
 import { useState, useEffect } from "react";
-import {} from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import { Alert, StyleSheet, Text, View } from "react-native";
 import InstructionText from "../components/ui/InstructionText";
 import NumberContainer from "../components/game/NumberContainer";
+import Colors from "../utils/colors";
 
 function generateRandomBetween(min, max, exclude) {
   const randomNumber = Math.floor(Math.random() * (max - min)) + min;
@@ -58,12 +59,16 @@ function GameScreen({ userNumber, onGameOver }) {
         <View style={styles.buttonsContainer}>
           <View style={styles.buttonContainer}>
             <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
-              -
+              <Ionicons name="remove-circle-sharp" size={24} color={Colors.accent500} />
             </PrimaryButton>
           </View>
           <View style={styles.buttonContainer}>
             <PrimaryButton onPress={nextGuessHandler.bind(this, "higher")}>
-              +
+              <Ionicons
+                name="add-circle-sharp"
+                size={24}
+                color={Colors.accent500}
+              />
             </PrimaryButton>
           </View>
         </View>
