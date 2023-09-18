@@ -51,13 +51,11 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   resultText: {
-    fontFamily: "open-sans",
     fontSize: 24,
     textAlign: "center",
     marginBottom: 24,
   },
   resultHighlightText: {
-    fontFamily: "open-sans-bold",
     color: Colors.primary500,
   },
 });

@@ -7,21 +7,13 @@ import StartGameScreen from "./screens/StartGameScreen";
 import GameOverScreen from "./screens/GameOverScreen";
 import { StyleSheet, ImageBackground, SafeAreaView } from "react-native";
 import { useFonts } from "expo-font";
-import AppLoading from "expo-app-loading";
+
 
 export default function App() {
   const [userNumber, setUserNumber] = useState();
   const [isGameOver, setIsGameOver] = useState(true);
   const [rounds, setRounds] = useState(0);
 
-  const [isFontsLoaded] = useFonts({
-    "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
-    "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
-  });
-
-  // if (!isFontsLoaded) {
-  //   return <AppLoading />;
-  // }
 
   function pickedNumberHandler(picekedNumber) {
     setUserNumber(picekedNumber);
