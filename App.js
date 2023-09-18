@@ -6,40 +6,50 @@ import { LinearGradient } from "expo-linear-gradient";
 import StartGameScreen from "./screens/StartGameScreen";
 import GameOverScreen from "./screens/GameOverScreen";
 import { StyleSheet, ImageBackground, SafeAreaView } from "react-native";
-import {useFonts} from 'expo-font'
+import { useFonts } from "expo-font";
+import AppLoading from "expo-app-loading";
 
 export default function App() {
   const [userNumber, setUserNumber] = useState();
   const [isGameOver, setIsGameOver] = useState(true);
 
-useFonts({
-  'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
-  'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'),
-});
+  const [isFontsLoaded] = useFonts({
+    "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
+    "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
+  });
+
+  if (!isFontsLoaded) {
+    return <AppLoading />;
+  }
 
   function pickedNumberHandler(picekedNumber) {
     setUserNumber(picekedNumber);
     setIsGameOver(false);
   }
 
-  function gameOverHandler(){
+  function gameOverHandler() {
     setIsGameOver(true);
   }
 
   let screen = <StartGameScreen onPickNumber={pickedNumberHandler} />;
 
   if (userNumber) {
-    screen = <GameScreen userNumber={userNumber} onGameOver={gameOverHandler}/>;
+    screen = (
+      <GameScreen userNumber={userNumber} onGameOver={gameOverHandler} />
+    );
   }
 
-  if(isGameOver && userNumber) {
-    screen = <GameOverScreen/>;
+  if (isGameOver && userNumber) {
+    screen = <GameOverScreen />;
   }
-  
+
   return (
     <>
       <StatusBar style="light" />
-      <LinearGradient colors={[Colors.fromGradient, Colors.toGradient]} style={styles.rootScreen}>
+      <LinearGradient
+        colors={[Colors.fromGradient, Colors.toGradient]}
+        style={styles.rootScreen}
+      >
         <ImageBackground
           source={require("./assets/images/background.jpg")}
           resizeMode="cover"
