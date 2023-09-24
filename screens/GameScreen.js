@@ -167,6 +167,8 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
   instructionText: {
     marginBottom: 12,
